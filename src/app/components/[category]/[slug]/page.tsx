@@ -8,7 +8,6 @@ import path from "path";
 import { CopyButton } from "@/components/ui/copy-button";
 import { InstallationTabs } from "@/components/installation-tabs";
 import { PropsTable } from "@/components/props-table";
-import { cn } from "@/lib/utils";
 
 interface PageProps {
     params: Promise<{
@@ -32,7 +31,7 @@ export default async function ComponentPage({ params }: PageProps) {
 
     try {
         code = await fs.readFile(filePath, "utf-8");
-    } catch (error) {
+    } catch {
         code = "// Error reading file";
     }
 

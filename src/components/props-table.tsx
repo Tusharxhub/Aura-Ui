@@ -1,5 +1,4 @@
 import * as React from "react";
-import { cn } from "@/lib/utils";
 
 export interface PropDef {
     name: string;
@@ -29,7 +28,7 @@ export function PropsTable({ data }: PropsTableProps) {
                     </tr>
                 </thead>
                 <tbody>
-                    {data.map((prop, index) => (
+                    {data.map((prop) => (
                         <tr key={prop.name} className="border-b border-border/50 last:border-0 hover:bg-muted/30 transition-colors">
                             <td className="p-4 align-top font-bold text-foreground">
                                 {prop.name}

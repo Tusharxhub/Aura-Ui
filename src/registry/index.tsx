@@ -23,6 +23,7 @@ export interface RegistryItem {
     name: string;
     type: "components:ui" | "components:block";
     files: string[];
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     component: React.LazyExoticComponent<React.ComponentType<any>>;
     category: string;
     slug: string;

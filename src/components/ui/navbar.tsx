@@ -25,7 +25,6 @@ export function Navbar() {
             style={{
                 height,
                 backgroundColor,
-                // @ts-ignore
                 backdropFilter,
                 borderBottomColor,
             }}
