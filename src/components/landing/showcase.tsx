@@ -1,11 +1,21 @@
 'use client';
 
+import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
+
 export function Showcase() {
     return (
         <section id="components" className="py-28 bg-background border-t border-border/60">
             <div className="max-w-[1200px] mx-auto px-6">
-                <div className="mb-12">
+                <div className="mb-12 flex items-center justify-between">
                     <h2 className="text-3xl md:text-4xl font-semibold tracking-tight">Component showcase</h2>
+                    <Link
+                        href="/components"
+                        className="text-sm font-medium text-muted-foreground hover:text-brand flex items-center gap-1 transition-colors"
+                    >
+                        View all components
+                        <ArrowRight className="w-4 h-4 ml-1" />
+                    </Link>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
