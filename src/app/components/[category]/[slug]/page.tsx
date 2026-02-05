@@ -36,18 +36,18 @@ export default async function ComponentPage({ params }: PageProps) {
     }
 
     return (
-        <div className="min-h-screen bg-background pt-32 pb-24">
+        <div className="min-h-screen bg-background pt-24 pb-16 md:pt-32 md:pb-24">
             <div className="max-w-[1000px] mx-auto px-6">
                 <Link
                     href="/components"
-                    className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors mb-8 group"
+                    className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors mb-6 md:mb-8 group"
                 >
                     <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" />
                     Back to components
                 </Link>
 
                 {/* Header */}
-                <div className="space-y-4 mb-10">
+                <div className="space-y-4 mb-8 md:mb-10">
                     <div className="flex items-center gap-2">
                         <span className="px-2.5 py-1 rounded-full bg-brand/10 border border-brand/20 text-xs font-semibold text-brand tracking-wide uppercase">
                             {component.category}
@@ -58,20 +58,20 @@ export default async function ComponentPage({ params }: PageProps) {
                             </span>
                         ))}
                     </div>
-                    <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground">{component.name}</h1>
-                    <p className="text-lg text-muted-foreground max-w-2xl">
+                    <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-foreground">{component.name}</h1>
+                    <p className="text-base md:text-lg text-muted-foreground max-w-2xl leading-relaxed">
                         A reusable, accessible, and customizable {component.name.toLowerCase()} component.
                     </p>
                 </div>
 
-                <div className="grid gap-16">
+                <div className="grid gap-12 md:gap-16">
 
                     {/* Preview (First) */}
                     <div className="space-y-4">
                         <div className="flex items-center justify-between border-b border-border/50 pb-2">
                             <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">Preview</h2>
                         </div>
-                        <div className="rounded-xl border border-border bg-card p-12 flex items-center justify-center min-h-[400px] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-secondary/20 via-background to-background relative overflow-hidden shadow-sm">
+                        <div className="rounded-xl border border-border bg-card p-6 md:p-12 flex items-center justify-center min-h-[300px] md:min-h-[400px] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-secondary/20 via-background to-background relative overflow-hidden shadow-sm">
                             <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:20px_20px]" />
                             <React.Suspense fallback={<div className="animate-pulse text-muted-foreground">Loading preview...</div>}>
                                 <div className="relative z-10 scale-125">
