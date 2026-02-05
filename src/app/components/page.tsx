@@ -1,18 +1,19 @@
 import { ComponentView } from "@/components/component-view";
-
-// Button Registry
-import PrimaryButton from "@/registry/buttons/primary-button";
-import SecondaryButton from "@/registry/buttons/secondary-button";
-import OutlineButton from "@/registry/buttons/outline-button";
-import GhostButton from "@/registry/buttons/ghost-button";
-
-// Input Registry
-import TextInput from "@/registry/inputs/text-input";
-
-// Card Registry
-import FeatureCard from "@/registry/cards/feature-card";
+import { registry } from "@/registry/index";
+import * as React from "react";
 
 export default function ComponentsPage() {
+    // Group components by category
+    const componentsByCategory = Object.values(registry).reduce((acc, item) => {
+        if (!acc[item.category]) {
+            acc[item.category] = [];
+        }
+        acc[item.category].push(item);
+        return acc;
+    }, {} as Record<string, typeof registry[keyof typeof registry][]>);
+
+    const categories = Object.keys(componentsByCategory);
+
     return (
         <div className="min-h-screen bg-background">
             <div className="pt-32 pb-24 px-6 max-w-[1200px] mx-auto">
@@ -25,46 +26,25 @@ export default function ComponentsPage() {
                 </div>
 
                 <div className="space-y-16">
-
-                    {/* Buttons Category */}
-                    <section id="buttons" className="space-y-6">
-                        <h2 className="text-2xl font-semibold text-foreground tracking-tight border-b border-border/50 pb-2">Buttons</h2>
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            <ComponentView name="primary-button" category="buttons">
-                                <PrimaryButton />
-                            </ComponentView>
-                            <ComponentView name="secondary-button" category="buttons">
-                                <SecondaryButton />
-                            </ComponentView>
-                            <ComponentView name="outline-button" category="buttons">
-                                <OutlineButton />
-                            </ComponentView>
-                            <ComponentView name="ghost-button" category="buttons">
-                                <GhostButton />
-                            </ComponentView>
-                        </div>
-                    </section>
-
-                    {/* Inputs Category */}
-                    <section id="inputs" className="space-y-6">
-                        <h2 className="text-2xl font-semibold text-foreground tracking-tight border-b border-border/50 pb-2">Inputs</h2>
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            <ComponentView name="text-input" category="inputs">
-                                <TextInput />
-                            </ComponentView>
-                        </div>
-                    </section>
-
-                    {/* Cards Category */}
-                    <section id="cards" className="space-y-6">
-                        <h2 className="text-2xl font-semibold text-foreground tracking-tight border-b border-border/50 pb-2">Cards</h2>
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            <ComponentView name="feature-card" category="cards">
-                                <FeatureCard />
-                            </ComponentView>
-                        </div>
-                    </section>
-
+                    {categories.map((category) => (
+                        <section key={category} id={category} className="space-y-6">
+                            <h2 className="text-2xl font-semibold text-foreground tracking-tight border-b border-border/50 pb-2 capitalize">
+                                {category}
+                            </h2>
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                {componentsByCategory[category].map((item) => {
+                                    const Component = item.component;
+                                    return (
+                                        <ComponentView key={item.slug} name={item.name} slug={item.slug} category={item.category}>
+                                            <React.Suspense fallback={<div className="text-sm text-center text-muted-foreground">Loading...</div>}>
+                                                <Component />
+                                            </React.Suspense>
+                                        </ComponentView>
+                                    );
+                                })}
+                            </div>
+                        </section>
+                    ))}
                 </div>
             </div>
         </div>
