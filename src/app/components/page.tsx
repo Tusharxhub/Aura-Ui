@@ -13,17 +13,13 @@ export default function ComponentsPage() {
         return acc;
     }, {} as Record<string, typeof registry[keyof typeof registry][]>);
 
-    // Flatten list for search - include both pages and components
-    const allComponents = [
-        { name: 'Home', slug: '', category: 'Pages', description: 'Go to home page' },
-        { name: 'Components', slug: 'components', category: 'Pages', description: 'View all components' },
-        ...Object.values(registry).map(item => ({
-            name: item.name,
-            slug: item.slug,
-            category: item.category,
-            description: `${item.category} component`,
-        })),
-    ];
+    // Flatten list for search - components only
+    const allComponents = Object.values(registry).map(item => ({
+        name: item.name,
+        slug: item.slug,
+        category: item.category,
+        description: `${item.category} component`,
+    }));
 
     const categories = Object.keys(componentsByCategory);
 
