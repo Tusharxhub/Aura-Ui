@@ -78,7 +78,7 @@ export function Navbar() {
                         <kbd className="text-xs px-1.5 py-0.5 rounded bg-background/50 border border-border text-muted-foreground group-hover:text-foreground">⌘K</kbd>
                     </button>
                     <Link
-                        href="https://github.com"
+                        href="https://github.com/Tusharxhub/Aura-Ui"
                         className="hidden sm:block p-2 text-muted-foreground hover:text-foreground transition-colors"
                     >
                         <Github className="w-5 h-5" />
