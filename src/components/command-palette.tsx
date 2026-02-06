@@ -94,6 +94,18 @@ export const CommandPalette = forwardRef<CommandPaletteRef, CommandPaletteProps>
         setSelectedIndex(0);
     }, [search]);
 
+    // Prevent body scroll when modal is open
+    useEffect(() => {
+        if (isOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+        return () => {
+            document.body.style.overflow = 'unset';
+        };
+    }, [isOpen]);
+
     return (
         <>
             {/* Command Palette Modal */}

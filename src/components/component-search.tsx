@@ -80,6 +80,18 @@ export function ComponentSearch({ items, onSelect }: ComponentSearchProps) {
         setSelectedIndex(0);
     }, [search]);
 
+    // Prevent body scroll when dropdown is open
+    React.useEffect(() => {
+        if (isOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+        return () => {
+            document.body.style.overflow = 'unset';
+        };
+    }, [isOpen]);
+
     return (
         <div className="w-full" onKeyDown={handleKeyDown}>
             {/* Search Input */}
