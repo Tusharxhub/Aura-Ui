@@ -67,6 +67,23 @@ export function Navbar() {
                 </nav>
 
                 <div className="hidden md:flex items-center gap-4">
+                    <button
+                        onClick={() => {
+                            const event = new KeyboardEvent('keydown', {
+                                key: 'k',
+                                code: 'KeyK',
+                                keyCode: 75,
+                                metaKey: true,
+                                bubbles: true
+                            });
+                            window.dispatchEvent(event);
+                        }}
+                        className="flex items-center gap-2 px-3 py-1.5 rounded-md bg-secondary/50 border border-border/50 text-muted-foreground hover:text-foreground hover:border-brand/50 transition-all cursor-pointer group"
+                        title="Press Cmd+K or Ctrl+K to search"
+                    >
+                        <span className="text-xs font-medium">Search</span>
+                        <kbd className="text-xs px-1.5 py-0.5 rounded bg-background/50 border border-border text-muted-foreground group-hover:text-foreground">⌘K</kbd>
+                    </button>
                     <Link
                         href="https://github.com"
                         className="hidden sm:block p-2 text-muted-foreground hover:text-foreground transition-colors"

@@ -1,4 +1,5 @@
 import { ComponentView } from "@/components/component-view";
+import { ComponentSearch } from "@/components/component-search";
 import { registry } from "@/registry/index";
 import * as React from "react";
 
@@ -12,17 +13,27 @@ export default function ComponentsPage() {
         return acc;
     }, {} as Record<string, typeof registry[keyof typeof registry][]>);
 
+    // Flatten list for search
+    const allComponents = Object.values(registry).map(item => ({
+        name: item.name,
+        slug: item.slug,
+        category: item.category,
+    }));
+
     const categories = Object.keys(componentsByCategory);
 
     return (
         <div className="min-h-screen bg-background">
             <div className="pt-20 sm:pt-32 pb-16 sm:pb-24 px-4 sm:px-6 max-w-[1200px] mx-auto">
-                <div className="mb-12 sm:mb-16">
+                <div className="mb-8 sm:mb-12">
                     <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-4 text-foreground">Aura Registry</h1>
-                    <p className="text-muted-foreground text-base sm:text-lg max-w-2xl">
+                    <p className="text-muted-foreground text-base sm:text-lg max-w-2xl mb-6">
                         A growing collection of copy-paste components.
                         Upload your components to <code>src/registry</code> to see them here.
                     </p>
+                    <div className="max-w-md">
+                        <ComponentSearch items={allComponents} />
+                    </div>
                 </div>
 
                 <div className="space-y-12 sm:space-y-16">
