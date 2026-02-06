@@ -5,10 +5,10 @@ import { ArrowRight } from 'lucide-react';
 
 export function Showcase() {
     return (
-        <section id="components" className="py-28 bg-background border-t border-border/60">
-            <div className="max-w-[1200px] mx-auto px-6">
-                <div className="mb-12 flex items-center justify-between">
-                    <h2 className="text-3xl md:text-4xl font-semibold tracking-tight">Component showcase</h2>
+        <section id="components" className="py-16 sm:py-28 bg-background border-t border-border/60">
+            <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
+                <div className="mb-8 sm:mb-12 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight">Component showcase</h2>
                     <Link
                         href="/components"
                         className="text-sm font-medium text-muted-foreground hover:text-brand flex items-center gap-1 transition-colors"
@@ -18,7 +18,7 @@ export function Showcase() {
                     </Link>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                     <div className="p-7 rounded-xl bg-secondary/10 border border-border flex flex-col items-center justify-center gap-4 min-h-[220px] hover:bg-secondary/20 transition-colors">
                         <div className="flex items-center justify-between w-full text-xs uppercase tracking-[0.2em] text-muted-foreground">
                             <span>Button</span>

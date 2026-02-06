@@ -51,7 +51,7 @@ export function Navbar() {
                 backdropFilter,
                 borderBottomColor,
             }}
-            className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 border-b border-transparent"
+            className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 sm:px-6 border-b border-transparent"
         >
             <div className="max-w-[1200px] mx-auto w-full flex items-center justify-between">
                 <Link href="/" className="flex items-center gap-2 group z-50" onClick={() => setIsOpen(false)}>

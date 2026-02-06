@@ -16,22 +16,22 @@ export default function ComponentsPage() {
 
     return (
         <div className="min-h-screen bg-background">
-            <div className="pt-32 pb-24 px-6 max-w-[1200px] mx-auto">
-                <div className="mb-16">
-                    <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-foreground">Aura Registry</h1>
-                    <p className="text-muted-foreground text-lg max-w-2xl">
+            <div className="pt-20 sm:pt-32 pb-16 sm:pb-24 px-4 sm:px-6 max-w-[1200px] mx-auto">
+                <div className="mb-12 sm:mb-16">
+                    <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-4 text-foreground">Aura Registry</h1>
+                    <p className="text-muted-foreground text-base sm:text-lg max-w-2xl">
                         A growing collection of copy-paste components.
                         Upload your components to <code>src/registry</code> to see them here.
                     </p>
                 </div>
 
-                <div className="space-y-16">
+                <div className="space-y-12 sm:space-y-16">
                     {categories.map((category) => (
-                        <section key={category} id={category} className="space-y-6">
-                            <h2 className="text-2xl font-semibold text-foreground tracking-tight border-b border-border/50 pb-2 capitalize">
+                        <section key={category} id={category} className="space-y-4 sm:space-y-6">
+                            <h2 className="text-xl sm:text-2xl font-semibold text-foreground tracking-tight border-b border-border/50 pb-2 capitalize">
                                 {category}
                             </h2>
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                                 {componentsByCategory[category].map((item) => {
                                     const Component = item.component;
                                     return (

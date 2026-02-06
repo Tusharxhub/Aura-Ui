@@ -42,7 +42,7 @@ export function ComponentPreview({ autoCycle = false }: ComponentPreviewProps) {
     }, [activeTab, autoCycle]);
 
     return (
-        <div className="w-full max-w-md mx-auto bg-card border border-border rounded-xl overflow-hidden shadow-[0_25px_80px_-60px_rgba(107,104,255,0.35)]">
+        <div className="w-full max-w-sm md:max-w-md mx-auto bg-card border border-border rounded-xl overflow-hidden shadow-[0_25px_80px_-60px_rgba(107,104,255,0.35)]">
             {/* Tabs */}
             <div className="flex items-center border-b border-border bg-muted/30">
                 <button
@@ -84,7 +84,7 @@ export function ComponentPreview({ autoCycle = false }: ComponentPreviewProps) {
             </div>
 
             {/* Content */}
-            <div className="h-64 flex items-center justify-center p-8 bg-background relative overflow-hidden group">
+            <div className="h-56 sm:h-64 flex items-center justify-center p-6 sm:p-8 bg-background relative overflow-hidden group">
 
                 {/* Decorative Grid */}
                 <div className="absolute inset-0 bg-[linear-gradient(to_right,#1f222a_1px,transparent_1px),linear-gradient(to_bottom,#1f222a_1px,transparent_1px)] bg-[size:32px_32px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-25 pointer-events-none" />
@@ -122,7 +122,7 @@ export function ComponentPreview({ autoCycle = false }: ComponentPreviewProps) {
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -10 }}
                             transition={{ duration: 0.25, type: 'tween' }}
-                            className="w-full max-w-xs"
+                            className="w-full max-w-xs px-4 sm:px-0"
                         >
                             <div className="relative group">
                                 <input

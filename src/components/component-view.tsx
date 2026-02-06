@@ -16,17 +16,17 @@ export function ComponentView({ children, className, name, slug, category, ...pr
             )}
             {...props}
         >
-            <div className="flex items-center justify-between border-b border-border px-4 py-3 bg-secondary/20 rounded-t-xl">
-                <div className="flex items-center gap-2">
-                    <div className="h-2 w-2 rounded-full bg-muted-foreground group-hover:bg-brand transition-colors" />
-                    <span className="text-xs font-mono text-muted-foreground uppercase tracking-wider">{category} / {name}</span>
+            <div className="flex items-center justify-between border-b border-border px-3 sm:px-4 py-3 bg-secondary/20 rounded-t-xl">
+                <div className="flex items-center gap-2 min-w-0">
+                    <div className="h-2 w-2 rounded-full bg-muted-foreground group-hover:bg-brand transition-colors flex-shrink-0" />
+                    <span className="text-xs font-mono text-muted-foreground uppercase tracking-wider truncate">{category} / {name}</span>
                 </div>
                 {/* Link to detail page */}
                 <a href={`/components/${category}/${slug}`} className="absolute inset-0 z-10" aria-label={`View ${name} details`}>
                     <span className="sr-only">View details</span>
                 </a>
             </div>
-            <div className="flex min-h-[180px] w-full items-center justify-center p-8 bg-gradient-to-br from-background to-secondary/10 rounded-b-xl">
+            <div className="flex min-h-[160px] sm:min-h-[180px] w-full items-center justify-center p-4 sm:p-8 bg-gradient-to-br from-background to-secondary/10 rounded-b-xl">
                 {children}
             </div>
         </div>
