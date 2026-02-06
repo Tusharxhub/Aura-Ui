@@ -64,7 +64,7 @@ export function Hero() {
                             <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                         </Link>
                         <Link
-                            href="#components"
+                            href="/components"
                             className="inline-flex items-center justify-center w-full sm:w-auto px-6 py-3 text-sm font-medium text-muted-foreground bg-secondary/30 border border-border rounded-lg hover:bg-secondary/50 hover:text-foreground transition-colors"
                         >
                             View Components
