@@ -63,7 +63,6 @@ export function Navbar() {
                 <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-muted-foreground">
                     <Link href="#docs" className="hover:text-foreground transition-colors">Docs</Link>
                     <Link href="/components" className="hover:text-foreground transition-colors">Components</Link>
-                    <Link href="https://github.com" className="hover:text-foreground transition-colors">GitHub</Link>
                 </nav>
 
                 <div className="hidden md:flex items-center gap-4">
