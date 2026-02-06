@@ -136,7 +136,7 @@ export const CommandPalette = forwardRef<CommandPaletteRef, CommandPaletteProps>
                                 <Search className="w-5 h-5 text-muted-foreground flex-shrink-0" />
                                 <input
                                     type="text"
-                                    placeholder="Search components..."
+                                    placeholder="Search pages..."
                                     value={search}
                                     onChange={(e) => setSearch(e.target.value)}
                                     onKeyDown={handleKeyDown}
@@ -190,7 +190,7 @@ export const CommandPalette = forwardRef<CommandPaletteRef, CommandPaletteProps>
                                 </div>
                             ) : (
                                 <div className="px-4 py-8 text-center text-muted-foreground text-sm">
-                                    No results found
+                                    No pages found
                                 </div>
                             )}
 

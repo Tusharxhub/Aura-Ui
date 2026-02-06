@@ -1,7 +1,6 @@
 'use client';
 
 import { CommandPalette } from "@/components/command-palette";
-import { registry } from "@/registry/index";
 import { useEffect, useRef } from "react";
 
 export function GlobalCommandPalette() {
@@ -17,19 +16,12 @@ export function GlobalCommandPalette() {
         return () => window.removeEventListener('openSearchPalette', handleOpenSearch);
     }, []);
 
+    // Only pages - no components
     const pages = [
         { name: 'Home', slug: '', category: 'Navigation', type: 'page' as const },
         { name: 'Components', slug: 'components', category: 'Navigation', type: 'page' as const },
+        { name: 'Docs', slug: 'docs', category: 'Navigation', type: 'page' as const },
     ];
 
-    const components = Object.values(registry).map(item => ({
-        name: item.name,
-        slug: item.slug,
-        category: item.category,
-        type: 'component' as const,
-    }));
-
-    const items = [...pages, ...components];
-
-    return <CommandPalette ref={commandPaletteRef} items={items} />;
+    return <CommandPalette ref={commandPaletteRef} items={pages} />;
 }
