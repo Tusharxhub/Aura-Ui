@@ -54,6 +54,8 @@ export function ComponentSearch({ items, onSelect }: ComponentSearchProps) {
             return;
         }
 
+        if (filteredItems.length === 0) return;
+
         switch (e.key) {
             case 'ArrowDown':
                 e.preventDefault();
@@ -72,6 +74,7 @@ export function ComponentSearch({ items, onSelect }: ComponentSearchProps) {
             case 'Escape':
                 e.preventDefault();
                 setIsOpen(false);
+                setSearch('');
                 break;
         }
     };
@@ -93,7 +96,7 @@ export function ComponentSearch({ items, onSelect }: ComponentSearchProps) {
     }, [isOpen]);
 
     return (
-        <div className="w-full" onKeyDown={handleKeyDown}>
+        <div className="w-full">
             {/* Search Input */}
             <div className="relative">
                 <div 
@@ -115,6 +118,7 @@ export function ComponentSearch({ items, onSelect }: ComponentSearchProps) {
                             e.stopPropagation();
                             setIsOpen(true);
                         }}
+                        onKeyDown={handleKeyDown}
                         className="flex-1 bg-transparent text-foreground placeholder:text-muted-foreground outline-none text-sm"
                     />
                     {search && (
