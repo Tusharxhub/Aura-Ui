@@ -35,7 +35,14 @@ export function ComponentSearch({ items, onSelect }: ComponentSearchProps) {
         onSelect?.(item);
         setIsOpen(false);
         setSearch('');
-        window.location.href = `/components/${item.category}/${item.slug}`;
+        
+        // Handle pages
+        if (item.category === 'Pages') {
+            window.location.href = item.slug ? `/${item.slug}` : '/';
+        } else {
+            // Handle components
+            window.location.href = `/components/${item.category}/${item.slug}`;
+        }
     };
 
     const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -77,12 +84,14 @@ export function ComponentSearch({ items, onSelect }: ComponentSearchProps) {
         <div className="w-full" onKeyDown={handleKeyDown}>
             {/* Search Input */}
             <div className="relative">
-                <div className={cn(
-                    "flex items-center gap-2 px-4 py-3 rounded-lg border transition-all cursor-text",
-                    isOpen
-                        ? "border-brand bg-card shadow-[0_0_20px_-8px_rgba(107,104,255,0.6)]"
-                        : "border-border bg-background hover:border-brand/50"
-                )}>
+                <div 
+                    onClick={() => setIsOpen(true)}
+                    className={cn(
+                        "flex items-center gap-2 px-4 py-3 rounded-lg border transition-all cursor-text",
+                        isOpen
+                            ? "border-brand bg-card shadow-[0_0_20px_-8px_rgba(107,104,255,0.6)]"
+                            : "border-border bg-background hover:border-brand/50"
+                    )}>
                     <Search className="w-4 h-4 text-muted-foreground flex-shrink-0" />
                     <input
                         type="text"
@@ -90,12 +99,18 @@ export function ComponentSearch({ items, onSelect }: ComponentSearchProps) {
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
                         onFocus={() => setIsOpen(true)}
-                        onClick={() => setIsOpen(true)}
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            setIsOpen(true);
+                        }}
                         className="flex-1 bg-transparent text-foreground placeholder:text-muted-foreground outline-none text-sm"
                     />
                     {search && (
                         <button
-                            onClick={() => setSearch('')}
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                setSearch('');
+                            }}
                             className="p-1 hover:bg-secondary rounded transition-colors text-muted-foreground hover:text-foreground"
                         >
                             <X className="w-4 h-4" />

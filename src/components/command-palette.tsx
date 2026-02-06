@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
 import { Search, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -16,24 +16,32 @@ interface CommandPaletteProps {
     items: SearchItem[];
 }
 
-export function CommandPalette({ items }: CommandPaletteProps) {
+export interface CommandPaletteRef {
+    open: () => void;
+}
+
+export const CommandPalette = forwardRef<CommandPaletteRef, CommandPaletteProps>(({ items }, ref) => {
     const [isOpen, setIsOpen] = useState(false);
     const [search, setSearch] = useState('');
     const [selectedIndex, setSelectedIndex] = useState(0);
 
+    // Expose open method to parent
+    useImperativeHandle(ref, () => ({
+        open: () => {
+            setIsOpen(true);
+            setSearch('');
+        }
+    }));
+
     // Handle keyboard shortcut (Cmd/Ctrl + K)
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
-            if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+            // Check for Cmd+K (Mac) or Ctrl+K (Windows/Linux)
+            if ((e.metaKey || e.ctrlKey) && (e.key === 'k' || e.key === 'K')) {
                 e.preventDefault();
                 setIsOpen(prev => !prev);
                 setSearch('');
-            }
-            // Also listen for custom trigger event
-            if ((e.metaKey || e.ctrlKey) && e.code === 'KeyK') {
-                e.preventDefault();
-                setIsOpen(prev => !prev);
-                setSearch('');
+                return;
             }
         };
 
@@ -50,10 +58,10 @@ export function CommandPalette({ items }: CommandPaletteProps) {
     }, [search, items]);
 
     const handleSelect = (item: SearchItem) => {
-        if (item.type === 'component') {
-            window.location.href = `/components/${item.category}/${item.slug}`;
+        if (item.type === 'page') {
+            window.location.href = item.slug ? `/${item.slug}` : '/';
         } else {
-            window.location.href = `/${item.slug}`;
+            window.location.href = `/components/${item.category}/${item.slug}`;
         }
         setIsOpen(false);
         setSearch('');
@@ -138,7 +146,7 @@ export function CommandPalette({ items }: CommandPaletteProps) {
                                 <div className="max-h-[300px] overflow-y-auto custom-scrollbar divide-y divide-border/50">
                                     {filteredItems.map((item, idx) => (
                                         <motion.button
-                                            key={`${item.category}-${item.slug}`}
+                                            key={`${item.category}-${item.slug || 'home'}`}
                                             onClick={() => handleSelect(item)}
                                             onMouseEnter={() => setSelectedIndex(idx)}
                                             className={cn(
@@ -151,10 +159,18 @@ export function CommandPalette({ items }: CommandPaletteProps) {
                                             <div className="flex-1">
                                                 <div className="text-sm font-medium">{item.name}</div>
                                                 <div className={cn(
-                                                    "text-xs mt-1",
+                                                    "text-xs mt-1 flex items-center gap-2",
                                                     selectedIndex === idx ? "text-background/70" : "text-muted-foreground"
                                                 )}>
-                                                    {item.category}
+                                                    <span>{item.category}</span>
+                                                    <span className={cn(
+                                                        "px-1.5 py-0.5 rounded text-xs font-medium",
+                                                        selectedIndex === idx 
+                                                            ? "bg-background/30 text-background"
+                                                            : "bg-secondary/50 text-muted-foreground"
+                                                    )}>
+                                                        {item.type === 'page' ? 'Page' : 'Component'}
+                                                    </span>
                                                 </div>
                                             </div>
                                         </motion.button>
@@ -162,7 +178,7 @@ export function CommandPalette({ items }: CommandPaletteProps) {
                                 </div>
                             ) : (
                                 <div className="px-4 py-8 text-center text-muted-foreground text-sm">
-                                    No components found
+                                    No results found
                                 </div>
                             )}
 
@@ -180,4 +196,6 @@ export function CommandPalette({ items }: CommandPaletteProps) {
             </AnimatePresence>
         </>
     );
-}
+});
+
+CommandPalette.displayName = 'CommandPalette';
