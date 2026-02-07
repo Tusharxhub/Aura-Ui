@@ -18,7 +18,20 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+
+## Image Optimization
+
+For best performance, use the [Next.js Image component](https://nextjs.org/docs/app/building-your-application/optimizing/images) for all images. Replace `<img>` tags with `<Image />` from `next/image` and configure domains in `next.config.ts` if needed.
+
+Example:
+
+```tsx
+import Image from 'next/image';
+
+<Image src="/public/example.png" alt="Example" width={400} height={300} />
+```
+
+This ensures automatic resizing, lazy loading, and optimal formats.
 
 ## Commit Email Notifications
 

@@ -21,6 +21,8 @@ RUN npm run lint
 # If this fails, the build will stop here
 RUN npm run build
 
-# This Dockerfile is primarily for verification/testing.
-# To run the app, you would typically add:
-# CMD ["npm", "start"]
+
+# Production server with compression
+EXPOSE 3000
+ENV NODE_ENV=production
+CMD npm run start

@@ -1,3 +1,8 @@
+
+import * as React from "react";
+
+
+
 import { Hero } from "@/components/landing/hero";
 import { LivePreview } from "@/components/landing/live-preview";
 import { Features } from "@/components/landing/features";

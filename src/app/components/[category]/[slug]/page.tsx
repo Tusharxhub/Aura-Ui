@@ -1,3 +1,4 @@
+
 import * as React from "react";
 import { notFound } from "next/navigation";
 import { registry } from "@/registry/index";
@@ -9,35 +10,39 @@ import { CopyButton } from "@/components/ui/copy-button";
 import { InstallationTabs } from "@/components/installation-tabs";
 import { PropsTable } from "@/components/props-table";
 
+
+
+
+export async function generateStaticParams() {
+    return Object.values(registry).map(item => ({
+        category: item.category,
+        slug: item.slug,
+    }));
+}
+
 interface PageProps {
-    params: Promise<{
-        category: string;
-        slug: string;
-    }>;
+    params: { category: string; slug: string };
 }
 
 export default async function ComponentPage({ params }: PageProps) {
-    const { category, slug } = await params;
+    const { category, slug } = params;
     const component = registry[slug];
-
     if (!component || component.category !== category) {
         notFound();
     }
-
-    const Component = component.component;
-    const filePath = path.join(process.cwd(), component.files[0]);
-
     let code = "";
-
-    try {
-        code = await fs.readFile(filePath, "utf-8");
-    } catch {
-        code = "// Error reading file";
+    if (component && component.files && component.files[0]) {
+        const filePath = path.join(process.cwd(), component.files[0]);
+        try {
+            code = await fs.readFile(filePath, "utf-8");
+        } catch {
+            code = "// Error reading file";
+        }
     }
-
+    const Component = component.component;
     return (
         <div className="min-h-screen bg-background pt-20 sm:pt-24 md:pt-32 pb-12 sm:pb-16 md:pb-24">
-            <div className="max-w-[1000px] mx-auto px-4 sm:px-6">
+            <div className="max-w-250 mx-auto px-4 sm:px-6">
                 <Link
                     href="/components"
                     className="inline-flex items-center text-xs sm:text-sm text-muted-foreground hover:text-foreground transition-colors mb-6 sm:mb-8 group"
@@ -45,7 +50,6 @@ export default async function ComponentPage({ params }: PageProps) {
                     <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" />
                     Back to components
                 </Link>
-
                 {/* Header */}
                 <div className="space-y-4 mb-8 sm:mb-10">
                     <div className="flex flex-wrap items-center gap-2">
@@ -63,16 +67,14 @@ export default async function ComponentPage({ params }: PageProps) {
                         A reusable, accessible, and customizable {component.name.toLowerCase()} component.
                     </p>
                 </div>
-
                 <div className="grid gap-8 sm:gap-12 md:gap-16">
-
                     {/* Preview (First) */}
                     <div className="space-y-4">
                         <div className="flex items-center justify-between border-b border-border/50 pb-2">
                             <h2 className="text-XS sm:text-sm font-medium text-muted-foreground uppercase tracking-wider">Preview</h2>
                         </div>
-                        <div className="rounded-xl border border-border bg-card p-4 sm:p-6 md:p-12 flex items-center justify-center min-h-[250px] sm:min-h-[300px] md:min-h-[400px] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-secondary/20 via-background to-background relative overflow-hidden shadow-sm">
-                            <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:20px_20px]" />
+                        <div className="rounded-xl border border-border bg-card p-4 sm:p-6 md:p-12 flex items-center justify-center min-h-62.5 sm:min-h-75 md:min-h-100 bg-[radial-gradient(ellipse_at_top,var(--tw-gradient-stops))] from-secondary/20 via-background to-background relative overflow-hidden shadow-sm">
+                            <div className="absolute inset-0 bg-grid-white/[0.02] bg-size-[20px_20px]" />
                             <React.Suspense fallback={<div className="animate-pulse text-muted-foreground text-sm">Loading preview...</div>}>
                                 <div className="relative z-10 scale-100 sm:scale-100 md:scale-125">
                                     <Component />
@@ -80,12 +82,10 @@ export default async function ComponentPage({ params }: PageProps) {
                             </React.Suspense>
                         </div>
                     </div>
-
                     {/* Installation */}
                     <div className="space-y-4 sm:space-y-6">
                         <InstallationTabs slug={component.slug} code={code} />
                     </div>
-
                     {/* Usage (Labeled as Source Code) */}
                     {component.usage && (
                         <div className="space-y-4">
@@ -96,13 +96,12 @@ export default async function ComponentPage({ params }: PageProps) {
                                 <div className="absolute top-4 right-4 z-10">
                                     <CopyButton text={component.usage} />
                                 </div>
-                                <pre className="p-4 sm:p-6 overflow-x-auto text-xs sm:text-sm font-mono text-muted-foreground leading-relaxed custom-scrollbar max-h-[300px]">
+                                <pre className="p-4 sm:p-6 overflow-x-auto text-xs sm:text-sm font-mono text-muted-foreground leading-relaxed custom-scrollbar max-h-75">
                                     <code>{component.usage}</code>
                                 </pre>
                             </div>
                         </div>
                     )}
-
                     {/* Props */}
                     {component.props && (
                         <div className="space-y-4">
