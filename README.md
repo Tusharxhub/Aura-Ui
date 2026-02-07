@@ -20,6 +20,19 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Commit Email Notifications
+
+This repo sends an email whenever a commit is pushed. Recipients are stored in `.env`, and new commit author emails are automatically appended to `MAIL_RECIPIENTS`.
+
+Set these GitHub Actions secrets:
+
+- `SMTP_HOST`
+- `SMTP_PORT`
+- `SMTP_SECURE`
+- `SMTP_USER`
+- `SMTP_PASS`
+- `MAIL_FROM` (optional override)
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
