@@ -59,10 +59,10 @@ export function Navbar() {
             }}
             className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 sm:px-6 border-b border-transparent"
         >
-            <div className="max-w-[1200px] mx-auto w-full flex items-center justify-between">
+            <div className="max-w-300 mx-auto w-full flex items-center justify-between">
                 <Link href="/" className="flex items-center gap-2 group z-50" onClick={() => setIsOpen(false)}>
                     <motion.div 
-                        className="w-8 h-8 rounded-lg bg-gradient-to-tr from-brand to-brand-2"
+                        className="w-8 h-8 rounded-lg bg-linear-to-tr from-brand to-brand-2"
                         whileHover={{ scale: 1.05, rotate: 5 }}
                         whileTap={{ scale: 0.95 }}
                         transition={{ type: 'spring', stiffness: 400, damping: 17 }}

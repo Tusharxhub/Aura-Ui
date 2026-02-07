@@ -15,6 +15,26 @@ A modern, high-performance UI component library and showcase built with Next.js 
 
 ## Project Structure
 
+├── src/
+│   ├── app/
+│   │   ├── layout.tsx
+│   │   ├── page.tsx
+│   │   ├── components/
+│   │   │   └── [category]/[slug]/page.tsx
+│   │   └── globals.css
+│   ├── components/
+│   │   ├── ui/
+│   │   ├── landing/
+│   │   └── ...
+│   ├── lib/
+│   └── registry/
+│       ├── index.tsx
+│       └── ...
+├── public/
+├── Dockerfile
+├── package.json
+├── tsconfig.json
+├── README.md
 ```
 ├── src/
 │   ├── app/
