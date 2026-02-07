@@ -1,23 +1,65 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+
+# Aura UI
+
+A modern, high-performance UI component library and showcase built with Next.js 16, React 19, and TypeScript. Aura UI provides reusable, accessible, and customizable components, optimized for speed and developer experience.
+
+## Features
+
+- **Next.js App Router**: Static generation and dynamic routing for fast, SEO-friendly pages.
+- **Component Registry**: Organized, extensible registry for UI components, cards, and inputs.
+- **Live Previews**: Interactive component previews with code and props tables.
+- **Command Palette**: Global and local command palettes for quick navigation and actions.
+- **Image Optimization**: Uses Next.js Image component for automatic resizing and lazy loading.
+- **Production-Ready Dockerfile**: Optimized for deployment with compression and best practices.
+- **Commit Email Notifications**: Automated email alerts for repository activity (see below).
+
+## Project Structure
+
+```
+├── src/
+│   ├── app/
+│   │   ├── layout.tsx
+│   │   ├── page.tsx
+│   │   ├── components/
+│   │   │   └── [category]/[slug]/page.tsx
+│   │   └── globals.css
+│   ├── components/
+│   │   ├── ui/
+│   │   ├── landing/
+│   │   └── ...
+│   ├── lib/
+│   └── registry/
+│       ├── index.tsx
+│       └── ...
+├── public/
+├── Dockerfile
+├── package.json
+├── tsconfig.json
+├── README.md
+```
 
 ## Getting Started
 
-First, run the development server:
+Install dependencies:
+
+```bash
+npm install
+```
+
+Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the app.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Usage
 
+- Edit `src/app/page.tsx` for the homepage.
+- Add new components in `src/components/ui` or `src/components/landing`.
+- Register components in `src/registry/index.tsx`.
+- Customize styles in `src/app/globals.css`.
 
 ## Image Optimization
 
@@ -31,32 +73,32 @@ import Image from 'next/image';
 <Image src="/public/example.png" alt="Example" width={400} height={300} />
 ```
 
-This ensures automatic resizing, lazy loading, and optimal formats.
-
 ## Commit Email Notifications
 
-This repo sends an email whenever a commit is pushed. Recipients are stored in `.env`, and new commit author emails are automatically appended to `MAIL_RECIPIENTS`.
+This repository sends an email whenever a commit is pushed. Recipients are stored in `.env`, and new commit author emails are automatically appended to `MAIL_RECIPIENTS`.
 
-Set these GitHub Actions secrets:
+## Build & Deployment
 
-- `SMTP_HOST`
-- `SMTP_PORT`
-- `SMTP_SECURE`
-- `SMTP_USER`
-- `SMTP_PASS`
-- `MAIL_FROM` (optional override)
+Build for production:
 
-## Learn More
+```bash
+npm run build
+```
 
-To learn more about Next.js, take a look at the following resources:
+Start the production server:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm start
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Deploy on [Vercel](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) for seamless hosting and CDN.
 
-## Deploy on Vercel
+## Documentation & Resources
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Learn Next.js](https://nextjs.org/learn)
+- [Next.js GitHub](https://github.com/vercel/next.js)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+Aura UI is open for feedback and contributions. For issues or feature requests, please open a GitHub issue.
